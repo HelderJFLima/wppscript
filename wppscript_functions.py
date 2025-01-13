@@ -41,7 +41,8 @@ def get_float() -> float:
     unchecked = True
     number = 0.0
 
-    while unchecked:                          # Get a valid value and confirm it
+    # Get a valid value and confirm it
+    while unchecked:
         try:
             number = abs(float(input()))
 
@@ -55,7 +56,8 @@ def get_float() -> float:
                   end='')
             continue
 
-        if cm.isnan(number) or cm.isinf(number):     # In case of 'nan' or 'inf'
+        # In case of zero, 'nan' or 'inf'
+        if number == 0.0 or cm.isnan(number) or cm.isinf(number):
             print('\nInvalid value!\n\nPlease enter a valid number: ',
                   end='')
             continue
@@ -80,12 +82,19 @@ def get_integer() -> int:
     unchecked = True
     number = 0
 
-    while unchecked:                          # Get a valid value and confirm it
+    # Get a valid value and confirm it
+    while unchecked:
         try:
             number = abs(int(input()))
 
         except (ValueError, TypeError):
             print('\nInvalid value!\n\nPlease enter a positive number: ',
+                  end='')
+            continue
+
+        # In case of zero
+        if number == 0:
+            print('\nInvalid value!\n\nPlease enter a valid number: ',
                   end='')
             continue
 
@@ -110,7 +119,8 @@ def save_values(file_name: str, values: tuple) -> None:
 
     """
 
-    with open(file_name, mode='w') as f:         # Write the strings to the file
+    # Write the strings to the file
+    with open(file_name, mode='w') as f:
         for i in range(2):
             f.write(string_from(values[i]))
 
@@ -119,7 +129,8 @@ def save_values(file_name: str, values: tuple) -> None:
 
     print('\nThe output was saved in:\n')
 
-    print(os.getcwd() + '\\' + file_name + '\n')       # Display the path
+    # Display the path
+    print(os.getcwd() + '\\' + file_name + '\n')
 
 
 def string_from(lst: list) -> str:
@@ -134,6 +145,7 @@ def string_from(lst: list) -> str:
 
     """
 
-    s = str(lst).strip('[]').replace(' ', '')   # remove brackets and whitespace
+    # remove brackets and whitespace
+    s = str(lst).strip('[]').replace(' ', '')
 
     return s + '\n'
